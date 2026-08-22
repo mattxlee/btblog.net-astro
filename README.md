@@ -2,7 +2,7 @@
 
 由 WordPress 迁移而来的个人博客，使用 [Astro](https://astro.build) 构建。
 
-- 站点地址：<https://m.btblog.net>
+- 站点地址：<https://btblog.net>
 - 技术栈：Astro 7 + Markdown 内容集 + KaTeX 数学公式 + sitemap + RSS
 
 ## 快速开始
@@ -41,7 +41,6 @@ categories:
   - 数学
 tags:
   - certbot
-originalUrl: https://m.btblog.net/...   # 原始 WordPress 链接，便于追溯
 ---
 ```
 

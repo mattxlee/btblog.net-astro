@@ -97,7 +97,7 @@ def rewrite_images(html):
     """Rewrite WP upload image URLs to local /uploads/ paths."""
     # Absolute URLs with wp-content/uploads prefix
     html = re.sub(
-        r"https?://m\.btblog\.net/wp-content/uploads/",
+        r"https?://(?:m\.)?btblog\.net/wp-content/uploads/",
         "/uploads/",
         html,
     )

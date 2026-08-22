@@ -4,7 +4,6 @@ pubDate: 2026-06-09 17:23:25
 draft: false
 categories:
   - '技术'
-originalUrl: 'https://m.btblog.net/2026/06/09/rocksdb-%e4%b8%8e-bitcoin-%e7%b4%a2%e5%bc%95/'
 ---
 ## 巨量的 UTXO
 

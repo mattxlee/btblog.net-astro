@@ -9,7 +9,7 @@ import rehypeKatex from 'rehype-katex';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://m.btblog.net',
+  site: 'https://btblog.net',
   integrations: [mdx(), sitemap()],
   markdown: {
     processor: unified({
