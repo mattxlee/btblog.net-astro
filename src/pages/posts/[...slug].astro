@@ -29,7 +29,15 @@ const dateStr = pubDate.toLocaleDateString('zh-CN', {
       发布于 {dateStr}
       {
         categories.length > 0 && (
-          <span> · 分类：{categories.map((c) => <a href={`/categories/${encodeURIComponent(c)}/`}>{c}</a>).join('、')}</span>
+          <span>
+            {' '}· 分类：
+            {categories.map((c, i) => (
+              <>
+                {i > 0 && '、'}
+                <a href={`/categories/${encodeURIComponent(c)}/`}>{c}</a>
+              </>
+            ))}
+          </span>
         )
       }
     </p>
