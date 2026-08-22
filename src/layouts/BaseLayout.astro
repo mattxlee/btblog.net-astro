@@ -1,4 +1,5 @@
 ---
+import 'katex/dist/katex.min.css';
 const {
   title = '',
   description = '',
@@ -15,12 +16,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost
     <title>{title ? `${title} · ${siteTitle}` : siteTitle}</title>
     <meta name="description" content={description ?? siteTitle} />
     <link rel="canonical" href={canonicalURL} />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css"
-      integrity="sha384-zh0CIslj+VczvdkcMIjDIEdaW0/yjEGYOMJeS+k0iNcInChOLgXqQbRQ3QW+hQqg"
-      crossorigin="anonymous"
-    />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

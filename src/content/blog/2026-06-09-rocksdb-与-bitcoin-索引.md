@@ -43,7 +43,7 @@ block_opts.set_bloom_filter(10.0, false);
 第一个参数，是 Bloom filter 使用的位数，即：每个 Key 使用 10 位的 Bloom filter 空间。那么，假设有 1000 万个 Key，将会占用 ：
 
 $$
-\frac{10000000\*10}{8}\approx12 MB
+\frac{10000000*10}{8}\approx12 MB
 $$
 
 每一个 Key 用于 Bloom filter 的位数越多，就意味着在判断它是否存在时的准确率越高，可以参考下面的表格：
