@@ -1,0 +1,28 @@
+# build output
+dist/
+# generated types
+.astro/
+
+# dependencies
+node_modules/
+
+# logs
+logs/
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# environment files
+.env
+.env.production
+
+# macOS
+.DS_Store
+
+# python virtualenv used by migration tools
+.venv/
+__pycache__/
+*.pyc
+
+# WordPress 原始备份（如需重新迁移可保留）
+wordpress-backup/

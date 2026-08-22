@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).flatMap((p) => p.data.categories);
+const cats = [...new Set(posts)].sort();
+---
+
+<BaseLayout title="分类">
+  <section>
+    <h2 style="font-size:1.4rem">全部分类</h2>
+    {cats.length === 0 && <p>暂无分类</p>}
+    <ul style="display:flex;flex-wrap:wrap;gap:12px;list-style:none;padding:0">
+      {cats.map((c) => (
+        <li>
+          <a href={`/categories/${encodeURIComponent(c)}/`} style="display:inline-block;padding:8px 16px;border:1px solid var(--line);border-radius:20px;text-decoration:none;color:var(--fg)">
+            {c}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

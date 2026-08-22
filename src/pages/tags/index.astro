@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).flatMap((p) => p.data.tags);
+const tags = [...new Set(posts)].sort();
+---
+
+<BaseLayout title="标签">
+  <section>
+    <h2 style="font-size:1.4rem">全部标签</h2>
+    {tags.length === 0 && <p>暂无标签</p>}
+    <ul style="display:flex;flex-wrap:wrap;gap:12px;list-style:none;padding:0">
+      {tags.map((t) => (
+        <li>
+          <a href={`/tags/${encodeURIComponent(t)}/`} style="display:inline-block;padding:8px 16px;border:1px solid var(--line);border-radius:20px;text-decoration:none;color:var(--fg)">
+            # {t}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>

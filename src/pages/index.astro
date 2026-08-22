@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout description="SERENITY 的个人博客">
+  <section>
+    <h2 style="font-size:1.3rem;color:var(--muted);font-weight:500">全部文章 ({posts.length})</h2>
+    <ul style="list-style:none;padding:0;margin:0">
+      {
+        posts.map((post) => (
+          <li style="padding:1.2rem 0;border-bottom:1px solid var(--line)">
+            <time style="color:var(--muted);font-size:.88rem;display:block;margin-bottom:.3rem">
+              {post.data.pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+            <a href={`/posts/${post.id}/`} style="font-size:1.15rem;text-decoration:none;color:var(--fg)">
+              {post.data.title}
+            </a>
+            <div style="margin-top:.4rem">
+              {post.data.categories.map((c) => (
+                <a href={`/categories/${encodeURIComponent(c)}/`} style="font-size:.82rem;color:var(--accent);margin-right:.8rem"># {c}</a>
+              ))}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

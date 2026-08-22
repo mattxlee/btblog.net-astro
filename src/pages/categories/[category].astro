@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const cats = [...new Set(posts.flatMap((p) => p.data.categories))].sort();
+  return cats.map((c) => ({ params: { category: c }, props: { category: c, posts } }));
+}
+
+const { category, posts } = Astro.props;
+const catPosts = posts
+  .filter((p) => p.data.categories.includes(category))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const catName = decodeURIComponent(category);
+---
+
+<BaseLayout title={`分类：${catName}`}>
+  <section>
+    <h2 style="font-size:1.4rem">分类：{catName} ({catPosts.length})</h2>
+    <ul style="list-style:none;padding:0">
+      {catPosts.map((p) => (
+        <li style="padding:.6rem 0">
+          <time style="color:var(--muted);font-size:.85rem">
+            {p.data.pubDate.toLocaleDateString('zh-CN')}
+          </time>
+          <a href={`/posts/${p.id}/`} style="margin-left:.8rem;color:var(--fg);text-decoration:none">
+            {p.data.title}
+          </a>
+        </li>
+      ))}
+    </ul>
+    <p><a href="/categories/">← 返回全部分类</a></p>
+  </section>
+</BaseLayout>

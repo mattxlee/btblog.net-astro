@@ -1,0 +1,51 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, pubDate, categories, tags } = post.data;
+const dateStr = pubDate.toLocaleDateString('zh-CN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<BaseLayout title={title} description={post.data.description}>
+  <article>
+    <h1 style="font-size:2rem;margin-bottom:.3rem">{title}</h1>
+    <p style="color:var(--muted);margin:.2rem 0 1.6rem">
+      发布于 {dateStr}
+      {
+        categories.length > 0 && (
+          <span> · 分类：{categories.map((c) => <a href={`/categories/${encodeURIComponent(c)}/`}>{c}</a>).join('、')}</span>
+        )
+      }
+    </p>
+    <div class="prose">
+      <Content />
+    </div>
+    <hr style="margin:3rem 0;border:none;border-top:1px solid var(--line)" />
+    {
+      tags.length > 0 && (
+        <p style="color:var(--muted)">
+          标签：
+          {tags.map((t) => (
+            <a href={`/tags/${encodeURIComponent(t)}/`} style="margin-right:.6rem">#{t}</a>
+          ))}
+        </p>
+      )
+    }
+  </article>
+</BaseLayout>
