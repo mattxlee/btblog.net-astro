@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostList from '../../components/PostList.astro';
+import Pagination from '../../components/Pagination.astro';
+
+export async function getStaticPaths() {
+  const PER_PAGE = 5;
+  const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+  );
+  const totalPages = Math.ceil(posts.length / PER_PAGE);
+  // 第 1 页由首页（/）负责，这里只生成第 2 页及以后
+  const pages = [];
+  for (let i = 2; i <= totalPages; i++) {
+    pages.push({ params: { page: String(i) }, props: { posts, totalPages } });
+  }
+  return pages;
+}
+
+const { posts, totalPages } = Astro.props;
+const currentPage = Number(Astro.params.page);
+const pagePosts = posts.slice((currentPage - 1) * 5, currentPage * 5);
+---
+
+<BaseLayout title={`第 ${currentPage} 页`} description="SERENITY 的个人博客">
+  <section>
+    <h2 style="font-size:1.3rem;color:var(--muted);font-weight:500">全部文章 ({posts.length}) · 第 {currentPage} 页</h2>
+    <PostList posts={pagePosts} />
+    <Pagination currentPage={currentPage} totalPages={totalPages} />
+    <p style="margin-top:24px"><a href="/">← 返回首页</a></p>
+  </section>
+</BaseLayout>
