@@ -37,44 +37,44 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost
       rel="stylesheet"
     />
     <style is:global>
-      /* 亮色主题 —— TokyoNight Day */
+      /* 亮色主题 —— Gruvbox Light (medium) */
       :root {
-        --bg: #e1e2e7;
-        --fg: #3760bf;
-        --muted: #848cb5;
-        --line: #c4c8da;
-        --accent: #2e7de9;
-        --code-bg: #d3d6e0;
-        --on-accent: #ffffff;
-        --shadow: rgba(55, 96, 191, 0.18);
+        --bg: #fbf1c7;
+        --fg: #3c3836;
+        --muted: #7c6f64;
+        --line: #d5c4a1;
+        --accent: #076678;
+        --code-bg: #f2e5bc;
+        --on-accent: #fbf1c7;
+        --shadow: rgba(60, 56, 54, 0.18);
         color-scheme: light;
       }
 
-      /* 暗色主题 —— TokyoNight Storm */
+      /* 暗色主题 —— Gruvbox Dark (medium) */
       html[data-theme='dark'] {
-        --bg: #24283b;
-        --fg: #c0caf5;
-        --muted: #565f89;
-        --line: #292e42;
-        --accent: #7aa2f7;
-        --code-bg: #1f2335;
-        --on-accent: #1a1b26;
+        --bg: #282828;
+        --fg: #ebdbb2;
+        --muted: #a89984;
+        --line: #504945;
+        --accent: #83a598;
+        --code-bg: #1d2021;
+        --on-accent: #1d2021;
         --shadow: rgba(0, 0, 0, 0.4);
         color-scheme: dark;
       }
 
       /* JS 未启用时，跟随系统暗色偏好 */
-      @media (prefers-color-scheme: dark) {
+      @media (prefers-color-scheme: light) {
         :root:not([data-theme]) {
-          --bg: #24283b;
-          --fg: #c0caf5;
-          --muted: #565f89;
-          --line: #292e42;
-          --accent: #7aa2f7;
-          --code-bg: #1f2335;
-          --on-accent: #1a1b26;
-          --shadow: rgba(0, 0, 0, 0.4);
-          color-scheme: dark;
+          --bg: #fbf1c7;
+          --fg: #3c3836;
+          --muted: #7c6f64;
+          --line: #d5c4a1;
+          --accent: #076678;
+          --code-bg: #f2e5bc;
+          --on-accent: #fbf1c7;
+          --shadow: rgba(60, 56, 54, 0.18);
+          color-scheme: light;
         }
       }
 

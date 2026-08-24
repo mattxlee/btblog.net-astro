@@ -17,7 +17,7 @@ export default defineConfig({
       rehypePlugins: [rehypeKatex],
     }),
     shikiConfig: {
-      themes: { light: 'github-light', dark: 'tokyo-night' },
+      themes: { light: 'gruvbox-light-medium', dark: 'gruvbox-dark-medium' },
     },
   },
 });
