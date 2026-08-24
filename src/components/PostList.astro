@@ -18,7 +18,7 @@ const { posts } = Astro.props;
     posts.map((post) => (
       <li style="padding:1.2rem 0;border-bottom:1px solid var(--line)">
         <time style="color:var(--muted);font-size:.88rem;display:block;margin-bottom:.3rem">
-          {post.data.pubDate.toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' })}
+          {post.data.pubDate.toLocaleDateString('zh-CN', { timeZone: 'UTC', year: 'numeric', month: 'long', day: 'numeric' })}
         </time>
         <a href={`/posts/${post.id}/`} style="font-size:1.15rem;text-decoration:none;color:var(--fg)">
           {post.data.title}

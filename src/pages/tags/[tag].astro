@@ -22,7 +22,7 @@ const tagName = decodeURIComponent(tag);
       {tagPosts.map((p) => (
         <li style="padding:.6rem 0">
           <time style="color:var(--muted);font-size:.85rem">
-            {p.data.pubDate.toLocaleDateString('zh-CN')}
+            {p.data.pubDate.toLocaleDateString('zh-CN', { timeZone: 'UTC' })}
           </time>
           <a href={`/posts/${p.id}/`} style="margin-left:.8rem;color:var(--fg);text-decoration:none">
             {p.data.title}
