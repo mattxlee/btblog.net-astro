@@ -128,9 +128,12 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost
       }
       button.theme-toggle:hover { color: var(--accent); border-color: var(--accent); transform: rotate(15deg); }
       button.theme-toggle svg { width: 16px; height: 16px; display: block; }
-      .icon-dark { display: none; }
-      html[data-theme='dark'] .icon-dark { display: block; }
-      html[data-theme='dark'] .icon-light { display: none; }
+      /* 亮色模式显示月亮图标，暗色模式显示太阳图标。
+         选择器带 button.theme-toggle 前缀，确保优先级不低于上面 button.theme-toggle svg 规则。 */
+      button.theme-toggle .icon-light { display: none; }
+      html[data-theme='dark'] button.theme-toggle .icon-light { display: block; }
+      button.theme-toggle .icon-dark { display: block; }
+      html[data-theme='dark'] button.theme-toggle .icon-dark { display: none; }
 
       /* 代码块：跟随主题切换背景与前景 */
       .prose img { max-width: 100%; height: auto; border-radius: 4px; }
@@ -182,9 +185,6 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost
             title="切换主题"
           >
             <svg class="icon-light" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-            </svg>
-            <svg class="icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <circle cx="12" cy="12" r="5"></circle>
               <line x1="12" y1="1" x2="12" y2="3"></line>
               <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -194,6 +194,9 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'http://localhost
               <line x1="21" y1="12" x2="23" y2="12"></line>
               <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
               <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg class="icon-dark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
           </button>
         </nav>
