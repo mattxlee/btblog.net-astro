@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
-const { title, pubDate, categories, tags } = post.data;
+const { title, pubDate, categories } = post.data;
 // frontmatter 中的 pubDate 为无时区字符串，js-yaml 按 UTC 解析，
 // 这里统一用 UTC 显示，避免再次按本地时区转换导致日期偏移
 const dateStr = pubDate.toLocaleDateString('zh-CN', {
@@ -47,15 +47,5 @@ const dateStr = pubDate.toLocaleDateString('zh-CN', {
     <div class="prose">
       <Content />
     </div>
-    {
-      tags.length > 0 && (
-        <p style="color:var(--muted)">
-          标签：
-          {tags.map((t) => (
-            <a href={`/tags/${encodeURIComponent(t)}/`} style="margin-right:.6rem">#{t}</a>
-          ))}
-        </p>
-      )
-    }
   </article>
 </BaseLayout>

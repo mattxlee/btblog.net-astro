@@ -10,7 +10,6 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     draft: z.boolean().default(false),
     categories: z.array(z.string()).default([]),
-    tags: z.array(z.string()).default([]),
     // 原始 WordPress 信息（便于追溯）
     coverImage: z.string().optional(),
     originalSlug: z.string().optional(),
